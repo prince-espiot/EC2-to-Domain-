@@ -36,7 +36,7 @@ pipeline {
                     if (params.PLAN_TERRAFORM) {
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-crendentails-prince']]) {
                             sh 'echo "=================Terraform Plan=================="'
-                            sh 'terraform plan'
+                            sh 'terraform plan -out=tfplan'
                         }
                     }
                 }
@@ -49,7 +49,7 @@ pipeline {
                     if (params.APPLY_TERRAFORM) {
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-crendentails-prince']]) {
                             sh 'echo "=================Terraform Apply=================="'
-                            sh 'terraform apply -auto-approve'
+                            sh 'terraform apply -auto-approve tfplan'
                         }
                     }
                 }
