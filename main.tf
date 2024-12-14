@@ -52,3 +52,10 @@ module "alb" {
   lb_listner_default_action = "forward"
   lb_target_group_attachment_port = 80
 }
+
+module "hosted_zone" {
+  source          = "./hosted-zone"
+  domain_name     = var.domain_name
+  aws_lb_dns_name = module.alb.aws_lb_dns_name
+  aws_lb_zone_id  = module.alb.aws_lb_zone_id
+}
