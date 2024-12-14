@@ -1,5 +1,4 @@
 *.pem
 *.tfstate
-*.txt
-provider.tf 
+*.txt 
 .terraform
