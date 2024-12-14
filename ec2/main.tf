@@ -15,6 +15,11 @@ output "ssh_connection_string_for_ec2" {
 output "dev_proj_1_ec2_instance_id" {
   value = aws_instance.dev_proj_1_ec2.id
 }
+output "public_ip" {
+  value       = aws_instance.dev_proj_1_ec2.public_ip
+  description = "The public IP address of the EC2 instance."
+}
+
 
 resource "aws_instance" "dev_proj_1_ec2" {
   ami           = var.ami_id
@@ -24,7 +29,7 @@ resource "aws_instance" "dev_proj_1_ec2" {
   }
   key_name                    = "aws_key"
   subnet_id                   = var.subnet_id
-  vpc_security_group_ids      = var.sg_enable_ssh_https
+  vpc_security_group_ids      = [var.sg_enable_ssh_https]
   associate_public_ip_address = var.enable_public_ip_address
 
   user_data = var.user_data_install_apache
